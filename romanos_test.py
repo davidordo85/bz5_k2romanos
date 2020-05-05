@@ -1,7 +1,7 @@
 import unittest
 import romanos
 
-class RomanNumberTest(unittest.TestCase):
+class RomanToIntegerTest(unittest.TestCase):
 
     def test_symbols_romans(self):
         self.assertEqual(romanos.nRomano_a_entero('I'), 1)
@@ -49,6 +49,43 @@ class RomanNumberTest(unittest.TestCase):
         self.assertEqual(romanos.nRomano_a_entero('XXL'), 'Error en formato')
         self.assertEqual(romanos.nRomano_a_entero('IXL'), 'Error en formato')
         self.assertEqual(romanos.nRomano_a_entero('XXX'), 30)
+
+class IntegerToRomanTest(unittest.TestCase):
+    def test_traduccion_grupos_de_valor(self):
+        self.assertEqual(romanos.entero_a_nRomano(1), 'I')
+        self.assertEqual(romanos.entero_a_nRomano(10), 'X')
+        self.assertEqual(romanos.entero_a_nRomano(5), 'V')
+        self.assertEqual(romanos.entero_a_nRomano(50), 'L')
+        self.assertEqual(romanos.entero_a_nRomano(100), 'C')
+        self.assertEqual(romanos.entero_a_nRomano(500), 'D')
+        self.assertEqual(romanos.entero_a_nRomano(1000), 'M')
+
+    def test_traduccion_grupos_de_valor_complejos(self):
+        self.assertEqual(romanos.entero_a_nRomano(2), 'II')
+        self.assertEqual(romanos.entero_a_nRomano(3), 'III')
+        self.assertEqual(romanos.entero_a_nRomano(4), 'IV')
+        self.assertEqual(romanos.entero_a_nRomano(5), 'V')
+        self.assertEqual(romanos.entero_a_nRomano(6), 'VI')
+        self.assertEqual(romanos.entero_a_nRomano(7), 'VII')
+        self.assertEqual(romanos.entero_a_nRomano(8), 'VIII')
+        self.assertEqual(romanos.entero_a_nRomano(9), 'IX')
+        self.assertEqual(romanos.entero_a_nRomano(30), 'XXX')
+        self.assertEqual(romanos.entero_a_nRomano(400), 'CD')
+        self.assertEqual(romanos.entero_a_nRomano(3000), 'MMM')
+        
+
+    def test_busca_valor(self):
+        self.assertEqual(romanos.busca_valor_menor_o_igual(2), ('I', 1))
+        self.assertEqual(romanos.busca_valor_menor_o_igual(5), ('V', 5))
+        self.assertEqual(romanos.busca_valor_menor_o_igual(7), ('V', 5))
+
+    def test_descomponer(self):
+        self.assertEqual(romanos.descomponer(1492), [1000, 400, 90, 2])
+
+    def test_entero_a_nRomano(self):
+        self.assertEqual(romanos.entero_a_nRomano(1942), 'MCMXLII')
+        self.assertEqual(romanos.entero_a_nRomano(3999), 'MMMCMXCIX')
+        self.assertEqual(romanos.entero_a_nRomano(4000), 'Overflow')
 
 
         
