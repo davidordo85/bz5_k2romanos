@@ -54,7 +54,7 @@ def nRomano_a_entero(numero_nRomano):
 
 def entero_a_nRomano(valor):
     if valor > 3999:
-        return 'Overflow'
+        return ''
     componentes = descomponer(valor)
 
     res = ''
